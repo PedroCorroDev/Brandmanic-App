@@ -1,0 +1,186 @@
+:root{
+    --bg-color: rgb(255, 255, 255);
+    --bg-card-color: rgb(235, 235, 235);
+    --text-color: rgb(30, 30, 30);
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; /* Reset de rems: 62.5% = 10px de 16 px. Esto quiere decir que ahora 1 rem no es 1 rem como tal sino un 62,5% de un rem */
+    margin: 0;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+    scroll-behavior: smooth;
+}
+
+h1{
+    font-size: 24px;
+}
+
+main{
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 2em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+}
+.influencer-card {
+    position: relative;
+    max-width: 600px;
+    background: var(--bg-card-color);
+    padding: 1rem;
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 10px; 
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+    z-index: 3;
+}
+.influencer-card::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: -1; 
+    opacity: 0.7; 
+    border-radius: 20px;
+}
+.influencer-card-info{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -2;
+    max-width: 600px;
+    padding: 1rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 20px;
+
+}
+
+.influencer-card header{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 20px;
+}
+.influencer-card header p{
+    margin: 0;
+}
+.profile-pick{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    max-width: 60%;
+    min-width: 150px;
+    min-height: 150px;
+    max-height: 80%;
+    border-radius: 20% 50% 20% 50%;
+    border: solid 5px rgb(9, 226, 118);
+    margin-bottom: 10px;   
+    position: relative;
+}
+.profile-pick::before {
+    content: "Ver influcard";
+    position: absolute;
+    border-radius: 20% 50% 20% 50%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 145, 0, 0.7);
+    z-index: 1; 
+    opacity: 0; 
+    transition: opacity 0.3s; 
+    display: grid;
+    place-content: center;
+    color: white;
+    cursor: pointer;
+}
+.profile-pick:hover::before {
+    opacity: 1; 
+}
+
+.nacionalidad{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flag{
+    height: 20px;
+    padding: 5px;
+}
+.marquee-container{
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.marquee{
+    padding: 24px 0;
+    animation: marquee 20s infinite linear;
+    white-space: nowrap;
+    width: 200px;
+}
+@keyframes marquee {
+    0% {
+        transofrm: translateX(100);
+    }
+    100%{
+        transform: translateX(-1000%);
+    }
+}
+
+.influencer-card aside {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    height: 100%;
+}
+.title i{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+
+.influencer-card aside ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    height: 80%;
+}
+
+.influencer-card aside ul li{
+    padding: 0px 20px 0px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.heart-pulse{
+	display: inline-block;
+	font-size: 30px;
+	color: rgb(27, 19, 19);
+	animation: beat 1.2s infinite;
+	transform-origin: center;
+    
+}
+@keyframes beat {
+    from { transform: none; }
+    50% { transform: scale(1.4); }
+    to { transform: none; }
+}
+
+

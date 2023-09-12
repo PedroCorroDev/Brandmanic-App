@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de influencer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">    <link rel="stylesheet" href="../assets/css/normalize.css">
+    <link rel="stylesheet" href="../assets/css/stylesficha.css">
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/926d45081f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script src="http://cdn.jsdelivr.net/g/filesaver.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.js"></script>
+</head>
+<body>
+    <hero>
+        <header class="ficha-header">
+            <div class="influencer-info">
+                <div class="influencer-foto">
+                    <img  class="insta-logo" src="https://logotipoz.com/wp-content/uploads/2021/10/instagram-2-1.svg" alt="logo instagram">
+                </div>
+                <aside class="influencer-data">
+                    <h1 id="influencer_name"></h1>
+                    <div class="username">
+                        <img class="logo" src="https://logotipoz.com/wp-content/uploads/2021/10/instagram-2-1.svg" alt="logo instagram" alt="logo insta">
+                        <p id="influencer_username"></p>
+                    </div>
+                    <div class="other-data">
+                        <span id="influencer_info"></span>
+                    </div>
+                </aside>
+            </div>
+            <div class="donut-charts">
+                <div>
+                    <p class="reach">Reach</p>
+                    <div id="chartdiv1" style="width: 40px; height: 40px;"></div>
+                </div>
+                <div class="relevance">
+                    <p>Relevance</p>
+                    <div id="chartdiv2" style="width: 40px; height: 40px;"></div>
+                </div>
+                <div class="resonance">
+                    <p>Resonance</p>
+                    <div id="chartdiv3" style="width: 40px; height: 40px;"></div>
+                </div>
+            </div>
+            <nav>
+                <div>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span><a href="../index.html">Salir</a></span>
+                </div>
+                <div id="generateImageBtn">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Descargar influcard</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-eye"></i>
+                    <span>Ver perfil</span>
+                </div>
+                <p id="last_update"></p>
+            </nav>
+        </header>
+    </hero>
+
+    <main>
+        <article class="column">
+            <div class="influencer-container">
+                <span class="influencer-audience-btn">
+                    <i class="fa fa-users influencer-audience-icon icon"></i>
+                </span>
+                <h2 class="influencer-audience-title">AUDIENCIA</h2>
+            </div>
+            <div class="influencer-container-followers">
+                <article>
+                    <h3 class="fw-400">Audiencia</h3>
+                    <i class="fa-solid fa-users ic-aud-content-icon"></i>
+                    <p id="totalAudience"></p>
+                </article>
+                <article>
+                    <h3 class="fw-400">Seguidores Fake</h3>
+                    <i class="fa-solid fa-users ic-aud-content-icon"></i>
+                    <p id="totalFakeFollowers"></p>
+                </article>
+                <article>
+                    <h3 class="fw-400">Audiencia Real</h3>
+                    <i class="fa-solid fa-users fa-users-viewfinder"></i>                    
+                    <p id="totalRealAudience"></p>
+                </article>
+            </div>
+            <div class="age-distribution-container" id="age-distribution-container">
+                <h4 class="fw-400">Distribución por edad</h4>
+            </div>
+            <div class="container-gender-country">
+                <div class="container-gender">
+                    <h4 class="fw-400">Distribucion por género</h4>
+                    <div id="gender_chart_doughnut" style="min-height:200px; width:100%;"></div>
+                </div>
+                <div class="container-country" id="container-country">
+                    <h4 class="fw-400">Distribucion por pais</h4>
+                </div>
+            </div>
+        </article>
+
+        <article class="column">
+            <div class="influencer-container">
+                <span class="influencer-audience-btn">
+                    <i class="fa fa-users influencer-audience-icon icon"></i>
+                </span>
+                <h2 class="influencer-audience-title">PUBLICACIONES</h2>
+            </div>
+            <div class="container-general">
+                <h4 class="fw-400">Distribución de sus publicaciones por territorios</h4>
+                <div id="categories_chart_doughnut"></div>
+            </div>
+            <div class="container-general">
+                <h4 class="fw-400">Franja horaria de sus publicaciones</h4>
+                <div id="pie_post_hour_range"></div>
+            </div>
+            <div class="container-general">
+                <h4 class="fw-400">Marcas con las que ha trabajado</h4>
+                <div id="brands_container">
+
+                </div>
+            </div>
+        </article>
+
+        <article class="column">
+            <div class="influencer-container">
+                <span class="influencer-audience-btn">
+                    <i class="fa-solid fa-chart-line ic-card-icon icon"></i>
+                </span>
+                <h2 class="fw-500">DESEMPEÑO</h2>
+            </div>
+            <div class="container-reach-audience">
+                <div class="container-data">
+                    <div>
+                        <i class=" btn-audience fa fa-users" aria-hidden="true"></i>
+                        <span>Audiencia</span>
+                    </div>
+                    <span id="audience"></span>
+                </div>
+                <div class="container-data">
+                    <div>
+                        <i class="btn-reach fa fa-user" aria-hidden="true"></i>
+                        <span>Alcance</span>
+                    </div>
+                    <span id="reach"></span>
+                </div>
+            </div>
+            <div class="container-reach-audience">
+                <div class="container-data">
+                    <div>
+                        <i class="btn-impressions fa fa-fingerprint" aria-hidden="true"></i>
+                        <span>Impresiones</span>
+                    </div>
+                    <span id="impressions"></span>
+                </div>
+                <div class="container-data-bottom">
+                    <div class="container-data-indiv">
+                        <span id="impressions-reach"></span>
+                        <span>Alcance</span>
+                    </div>
+                    <div class="container-data-indiv">
+                        <span id="impressions-audience"></span>
+                        <span>Audiencia</span>
+                    </div>
+                </div>
+            </div>
+            <div class="container-reach-audience">
+                <div class="container-data">
+                    <div>
+                        <i class="btn-reproductions fa fa-play" aria-hidden="true"></i>
+                        <span>Reproducciones</span>
+                    </div>
+                    <span id="reproductions"></span>
+                </div>
+                <div class="container-data-bottom">
+                    <div class="container-data-indiv">
+                        <span id="reproductions-reach"></span>
+                        <span>Alcance</span>
+                    </div>
+                    <div class="container-data-indiv">
+                        <span id="reproductions-audience"></span>
+                        <span>Audiencia</span>
+                    </div>
+                </div>
+            </div>
+            <div class="container-reach-audience">
+                <div class="container-data">
+                    <div>
+                        <i class="btn-engagements fa fa-heart" aria-hidden="true"></i>
+                        <span>Engagement</span>
+                    </div>
+                    <span id="engagement"></span>
+                </div>
+                <div class="container-data-bottom">
+                    <div class="container-data-indiv">
+                        <span id="engagement-reach"></span>
+                        <span>Alcance</span>
+                    </div>
+                    <div class="container-data-indiv">
+                        <span id="engagement-audience"></span>
+                        <span>Audiencia</span>
+                    </div>
+                </div>
+            </div>
+            <div class="container-general">
+                <h4 class="fw-400">Engagement rate según día de publicación</h4>
+                <div id="bar_engagement_hour_range"></div>
+            </div>
+        </article>    
+    </main>
+    <script src="../assets/scripts/ficha.js"></script>
+ 
+</body>
+</html>
