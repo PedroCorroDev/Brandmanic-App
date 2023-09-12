@@ -447,29 +447,42 @@ document.addEventListener("DOMContentLoaded", () => {
             hideLoader();
           
 
-            document.getElementById('generateImageBtn').addEventListener('click', function() {
-                const apiKey = '86977a68b8d7d0e9cc1eefebf348ac49';
-                const urlToCapture = window.location.href; // Captura la URL actual
-                const format = 'PNG';
-                const apiUrl = `https://api.screenshotlayer.com/capture?access_key=${apiKey}&url=${urlToCapture}&format=${format}`;
-    
-                const image = new Image();
-                image.src = apiUrl;
-    
-                image.onload = function() {
-                    const downloadLink = document.createElement('a');
-                    downloadLink.href = image.src;
-                    downloadLink.download = 'captura.jpeg'; 
-    
-                    downloadLink.click();
-                };
+           document.getElementById('generateImageBtn').addEventListener('click', function () {
+                html2canvas(document.getElementById('my-profile'), { allowTaint: false, useCors: false })
+                    .then(function (canvas) {
+                        simulateDownloadImageClick(canvas.toDataURL(), 'ficha-influencer.png');
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        hideLoader();
+                    });
             });
-            
-            
-            
-        })  
+        })
         .catch(handleFetchError);
 });
+
+function simulateDownloadImageClick(uri, filename) {
+    let link = document.createElement('a');
+    if (typeof link.download !== 'string') {
+        window.open(uri);
+    } else {
+        link.href = uri;
+        link.download = filename;
+        accountForFirefox(clickLink, link);
+    }
+}
+
+function clickLink(link) {
+    link.click();
+}
+
+function accountForFirefox(click) { 
+    let link = arguments[1];
+    document.body.appendChild(link);
+    click(link);
+    document.body.removeChild(link);
+}
+
 
 
 
