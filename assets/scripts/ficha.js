@@ -451,7 +451,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const apiKey = '86977a68b8d7d0e9cc1eefebf348ac49';
                 const urlToCapture = window.location.href; // Captura la URL actual
                 const format = 'PNG';
-                const apiUrl = `https://api.screenshotlayer.com/capture?access_key=${apiKey}&url=${urlToCapture}&viewport=${width}x${height}&format=${format}`;
+                const apiUrl = `https://api.screenshotlayer.com/capture?access_key=${apiKey}&url=${urlToCapture}&format=${format}`;
     
                 const image = new Image();
                 image.src = apiUrl;
