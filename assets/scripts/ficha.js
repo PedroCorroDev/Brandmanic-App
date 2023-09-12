@@ -448,36 +448,19 @@ document.addEventListener("DOMContentLoaded", () => {
           
 
             document.getElementById('generateImageBtn').addEventListener('click', function() {
-                // Tu clave de API de Screenshotlayer
                 const apiKey = '86977a68b8d7d0e9cc1eefebf348ac49';
-    
-                // URL del sitio web que deseas capturar
                 const urlToCapture = window.location.href; // Captura la URL actual
-    
-                // Tamaño personalizado de la captura de pantalla (1720x900)
-                const width = 1720;
-                const height = 900;
-    
-                // Especifica el formato de la imagen como "jpeg"
                 const format = 'PNG';
-    
-                // Crea la URL de la API de Screenshotlayer con los parámetros personalizados
                 const apiUrl = `https://api.screenshotlayer.com/capture?access_key=${apiKey}&url=${urlToCapture}&viewport=${width}x${height}&format=${format}`;
     
-                // Crea un enlace temporal para cargar la imagen
                 const image = new Image();
-    
-                // Asigna la URL de la API a la imagen
                 image.src = apiUrl;
     
-                // Escucha el evento "load" para asegurarte de que la imagen se ha cargado completamente
                 image.onload = function() {
-                    // Crea un enlace de descarga para la captura de pantalla
                     const downloadLink = document.createElement('a');
                     downloadLink.href = image.src;
-                    downloadLink.download = 'captura.jpeg'; // Nombre de archivo de descarga (extensión .jpeg)
+                    downloadLink.download = 'captura.jpeg'; 
     
-                    // Simula un clic en el enlace de descarga
                     downloadLink.click();
                 };
             });
